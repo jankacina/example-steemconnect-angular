@@ -1,4 +1,3 @@
-# sc2-angular
-SteemConnect2 with AngularJS
+# Simple SteemConnect interation with AngularJS
 
-Demo: https://steemit.github.io/sc2-angular
+Try the demo here: https://steemit.github.io/example-steemconnect-angular
