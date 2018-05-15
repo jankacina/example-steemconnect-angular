@@ -1,4 +1,4 @@
-sc2.init({
+var api = sc2.Initialize({
   app: 'busy.app',
   callbackURL: 'https://steemit.github.io/example-steemconnect-angular',
   scope: ['vote', 'comment']
@@ -17,8 +17,8 @@ angular.module('app', [])
     $scope.loginURL = sc2.getLoginURL();
 
     if ($scope.accessToken) {
-      sc2.setAccessToken($scope.accessToken);
-      sc2.me(function (err, result) {
+      api.setAccessToken($scope.accessToken);
+      api.me(function (err, result) {
         console.log('/me', err, result);
         if (!err) {
           $scope.user = result.account;
@@ -44,7 +44,7 @@ angular.module('app', [])
     $scope.comment = function() {
       $scope.loading = true;
       var permlink = steem.formatter.commentPermlink($scope.parentAuthor, $scope.parentPermlink);
-      sc2.comment($scope.parentAuthor, $scope.parentPermlink, $scope.user.name, permlink, '', $scope.message, '', function(err, result) {
+      api.comment($scope.parentAuthor, $scope.parentPermlink, $scope.user.name, permlink, '', $scope.message, '', function(err, result) {
         console.log(err, result);
         $scope.message = '';
         $scope.loading = false;
@@ -54,7 +54,7 @@ angular.module('app', [])
     };
 
     $scope.vote = function(author, permlink, weight) {
-      sc2.vote($scope.user.name, author, permlink, weight, function (err, result) {
+      api.vote($scope.user.name, author, permlink, weight, function (err, result) {
         if (!err) {
           alert('You successfully voted for @' + author + '/' + permlink);
           console.log('You successfully voted for @' + author + '/' + permlink, err, result);
@@ -66,7 +66,7 @@ angular.module('app', [])
     };
 
     $scope.updateUserMetadata = function(metadata) {
-      sc2.updateUserMetadata(metadata, function (err, result) {
+      api.updateUserMetadata(metadata, function (err, result) {
         if (!err) {
           alert('You successfully updated user_metadata');
           console.log('You successfully updated user_metadata', result);
@@ -82,7 +82,7 @@ angular.module('app', [])
     };
 
     $scope.logout = function() {
-      sc2.revokeToken(function (err, result) {
+      api.revokeToken(function (err, result) {
         console.log('You successfully logged out', err, result);
         delete $scope.user;
         delete $scope.accessToken;
