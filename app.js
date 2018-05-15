@@ -14,7 +14,7 @@ angular.module('app', [])
     $scope.parentPermlink = '5vdmjq-test';
     $scope.accessToken = $location.search().access_token;
     $scope.expiresIn = $location.search().expires_in;
-    $scope.loginURL = sc2.getLoginURL();
+    $scope.loginURL = api.getLoginURL();
 
     if ($scope.accessToken) {
       api.setAccessToken($scope.accessToken);
